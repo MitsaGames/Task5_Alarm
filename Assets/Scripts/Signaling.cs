@@ -9,11 +9,8 @@ public class Signaling : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Триггер сработал ");
-
         if (other.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            Debug.Log("Обнаружен объект ");
             _enemyDetected.Invoke();
         }
     }

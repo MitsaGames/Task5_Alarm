@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 
     public void OnDetected()
     {
-        Debug.Log("Я обнаружен");
         IsDetected = true;
     }
 }
