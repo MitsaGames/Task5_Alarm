@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Rogue : MonoBehaviour
 {
     public bool IsDetected { get; private set; } = false;
 

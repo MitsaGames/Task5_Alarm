@@ -9,7 +9,7 @@ public class Signaling : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Enemy>(out Enemy enemy))
+        if (other.TryGetComponent<Rogue>(out Rogue enemy))
         {
             _enemyDetected.Invoke();
         }
