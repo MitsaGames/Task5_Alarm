@@ -6,8 +6,14 @@ using UnityEngine;
 public class RogueMove : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private Rogue _rogue;
     [SerializeField] private Transform _target;
+
+    private Rogue _rogue;
+
+    private void Awake()
+    {
+        _rogue = GetComponent<Rogue>();
+    }
 
     private void Update()
     {
