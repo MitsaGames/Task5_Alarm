@@ -1016,7 +1016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bc9f414cb884b4296b69f036602631, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 2
   _robberyTarget: {fileID: 664058236}
   _escapeTarget: {fileID: 435777183}
 --- !u!114 &1553314884
