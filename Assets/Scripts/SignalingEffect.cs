@@ -24,7 +24,11 @@ public class SignalingEffect : MonoBehaviour
         }
         else if(_turnOn == false && _audioSource.volume > 0.0f)
         {
-            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 0.0f, -_volumeSpeed * Time.deltaTime);
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, 0.0f, _volumeSpeed * Time.deltaTime);
+        }
+        else if(_audioSource.volume <= 0.0f && _audioSource.isPlaying == true)
+        {
+            _audioSource.Stop();
         }
     }
 

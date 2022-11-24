@@ -5,12 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rogue), typeof(Animator))]
 public class RogueMove : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    [SerializeField] private float _baseSpeed;
     [SerializeField] private Transform _robberyTarget;
     [SerializeField] private Transform _escapeTarget;
 
     private Rogue _rogue;
     private Animator _animator;
+    private float _speed;
 
     private void Awake()
     {
@@ -20,26 +21,37 @@ public class RogueMove : MonoBehaviour
 
     private void Update()
     {
-        if(_rogue.State == RogueState.ReactionToDetection)
-        {
-            _animator.SetFloat("speed", 0);
-        }
-        else
-        {
-            _animator.SetFloat("speed", _speed);
-        }
+        Transform target = null;
+        _speed = _baseSpeed;
 
         if (_rogue.State == RogueState.RunningToTarget || _rogue.State == RogueState.ReactionToDetection)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _robberyTarget.position, _speed * Time.deltaTime);
+            target = _robberyTarget;
         }
         else if (_rogue.State == RogueState.Detected)
         {
-            var directionToEscape = _escapeTarget.position - transform.position;
+            target = _escapeTarget;
+        }
 
-            transform.rotation = Quaternion.LookRotation(directionToEscape);
+        if (target != null)
+        {
+            var directionToEscape = target.position - transform.position;
 
-            transform.position = Vector3.MoveTowards(transform.position, _escapeTarget.position, _speed * Time.deltaTime);
+            if(directionToEscape != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(directionToEscape);
+            }
+
+            if (Vector3.Distance(transform.position, target.position) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+            }
+            else
+            {
+                _speed = 0.0f;
+            }
+
+            _animator.SetFloat("speed", _speed);
         }
     }
 }

@@ -9,22 +9,22 @@ public class Rogue : MonoBehaviour
     public bool IsDetected { get; private set; } = false;
     public RogueState State { get; private set; } = RogueState.RunningToTarget;
 
-    private Coroutine _coroutineWaitReactionToDetection;
-    private bool _isCoroutineWaitReactionToDetectionRunning = false;
+    private Coroutine _waitReactionToDetection;
+    private bool _isWaitReactionToDetectionRunning = false;
 
     private void Update()
     {
         if(State == RogueState.ReactionToDetection)
         {
-            _coroutineWaitReactionToDetection = StartCoroutine(WaitReactionToDetection(_detectionResponseTime));
-            _isCoroutineWaitReactionToDetectionRunning = true;
+            _waitReactionToDetection = StartCoroutine(WaitReactionToDetection(_detectionResponseTime));
+            _isWaitReactionToDetectionRunning = true;
         }
         else
         {
-            if(_isCoroutineWaitReactionToDetectionRunning == true)
+            if(_isWaitReactionToDetectionRunning == true)
             {
-                StopCoroutine(_coroutineWaitReactionToDetection);
-                _isCoroutineWaitReactionToDetectionRunning = false;
+                StopCoroutine(_waitReactionToDetection);
+                _isWaitReactionToDetectionRunning = false;
             }
         }
     }
