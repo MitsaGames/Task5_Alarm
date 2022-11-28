@@ -6,7 +6,6 @@ public class Rogue : MonoBehaviour
 {
     [SerializeField] private float _detectionResponseTime;
 
-    public bool IsDetected { get; private set; } = false;
     public RogueState State { get; private set; } = RogueState.RunningToTarget;
 
     private Coroutine _waitReactionToDetection;
@@ -32,7 +31,6 @@ public class Rogue : MonoBehaviour
     public void OnDetected()
     {
         State = RogueState.ReactionToDetection;
-        IsDetected = true;
     }
 
     private IEnumerator WaitReactionToDetection(float timeToWait)

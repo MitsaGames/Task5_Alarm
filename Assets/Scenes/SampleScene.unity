@@ -339,7 +339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 635526689}
         m_TargetAssemblyTypeName: SignalingEffect, Assembly-CSharp
-        m_MethodName: TurnOn
+        m_MethodName: StartTurnOn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -366,7 +366,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 635526689}
         m_TargetAssemblyTypeName: SignalingEffect, Assembly-CSharp
-        m_MethodName: TurnOff
+        m_MethodName: StartTurnOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

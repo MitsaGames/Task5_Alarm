@@ -12,6 +12,7 @@ public class RogueMove : MonoBehaviour
     private Rogue _rogue;
     private Animator _animator;
     private float _speed;
+    private float _moveThreshold = 0.1f;
 
     private void Awake()
     {
@@ -42,7 +43,7 @@ public class RogueMove : MonoBehaviour
                 transform.rotation = Quaternion.LookRotation(directionToEscape);
             }
 
-            if (Vector3.Distance(transform.position, target.position) > 0.1f)
+            if (Vector3.Distance(transform.position, target.position) > _moveThreshold)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
             }
