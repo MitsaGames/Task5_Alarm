@@ -42,15 +42,13 @@ public class SignalingEffect : MonoBehaviour
 
     private IEnumerator RegulateSignal(float targetVolume)
     {
-        int changeSign = (targetVolume > _audioSource.volume) ? 1 : -1;
-
-        while ((changeSign == 1 && _audioSource.volume < targetVolume) || (changeSign == -1 && _audioSource.volume > targetVolume))
+        while (_audioSource.volume != targetVolume)
         {
-            _audioSource.volume += changeSign * _volumeSpeed;
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, targetVolume, _volumeSpeed);
             yield return null;
         }
 
-        if(_audioSource.volume == 0.0f)
+        if(_audioSource.volume == _minAudioVolume)
         {
             _audioSource.Stop();
         }
