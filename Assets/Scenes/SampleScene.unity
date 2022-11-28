@@ -339,7 +339,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 635526689}
         m_TargetAssemblyTypeName: SignalingEffect, Assembly-CSharp
-        m_MethodName: StartTurnOn
+        m_MethodName: TurnOn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -366,7 +366,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 635526689}
         m_TargetAssemblyTypeName: SignalingEffect, Assembly-CSharp
-        m_MethodName: StartTurnOff
+        m_MethodName: TurnOff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb868eaee60151b499f2c09b3f5d6220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _volumeSpeed: 0.1
+  _volumeSpeed: 0.001
 --- !u!1 &664058235
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,8 +10,7 @@ public class SignalingEffect : MonoBehaviour
     private AudioSource _audioSource;
     private float _minAudioVolume = 0.0f;
     private float _maxAudioVolume = 1.0f;
-    private Coroutine _turnOnJob;
-    private Coroutine _turnOffJob;
+    private Coroutine _regulateSignalJob;
 
     private void Start()
     {
@@ -19,43 +18,41 @@ public class SignalingEffect : MonoBehaviour
         _audioSource.volume = _minAudioVolume;
     }
 
-    public void StartTurnOn()
+    public void TurnOn()
     {
-        _turnOnJob = StartCoroutine(TurnOn());
-    }
+        if (_regulateSignalJob != null)
+        {
+            StopCoroutine(_regulateSignalJob);
+        }
 
-    public void StartTurnOff()
-    {
-        StopCoroutine(_turnOnJob);
-
-        _turnOffJob = StartCoroutine(TurnOff());
-    }
-
-    private IEnumerator TurnOn()
-    {
         _audioSource.Play();
 
-        for (float audioSourceVolume = _audioSource.volume; audioSourceVolume < _maxAudioVolume; audioSourceVolume += _volumeSpeed)
-        {
-            _audioSource.volume = audioSourceVolume;
-
-            yield return null;
-        }
-
-        StopCoroutine(_turnOnJob);
+        _regulateSignalJob = StartCoroutine(RegulateSignal(_maxAudioVolume));
     }
 
-    private IEnumerator TurnOff()
+    public void TurnOff()
     {
-        for (float audioSourceVolume = _audioSource.volume; audioSourceVolume > _minAudioVolume; audioSourceVolume -= _volumeSpeed)
+        if (_regulateSignalJob != null)
         {
-            _audioSource.volume = audioSourceVolume;
+            StopCoroutine(_regulateSignalJob);
+        }
 
+        _regulateSignalJob = StartCoroutine(RegulateSignal(_minAudioVolume));
+    }
+
+    private IEnumerator RegulateSignal(float targetVolume)
+    {
+        int changeSign = (targetVolume > _audioSource.volume) ? 1 : -1;
+
+        while ((changeSign == 1 && _audioSource.volume < targetVolume) || (changeSign == -1 && _audioSource.volume > targetVolume))
+        {
+            _audioSource.volume += changeSign * _volumeSpeed;
             yield return null;
         }
 
-        _audioSource.Stop();
-
-        StopCoroutine(_turnOffJob);
+        if(_audioSource.volume == 0.0f)
+        {
+            _audioSource.Stop();
+        }
     }
 }
